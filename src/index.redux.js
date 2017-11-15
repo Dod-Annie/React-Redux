@@ -15,10 +15,18 @@ export function counter(state = 0, action) {
 }
 
 //action creator
-export function addGUN(){
-  return {type:ADD_GUN}
+export function addGUN() {
+  return { type: ADD_GUN }
 }
 
-export function removeGUN(){
-  return {type:REMOVE_GUN}
+export function removeGUN() {
+  return { type: REMOVE_GUN }
+}
+
+export function addGunAsync() {
+  return dispatch => {
+    setTimeout(() => {
+      dispatch(addGUN())
+    }, 2000)
+  }
 }

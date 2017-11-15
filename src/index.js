@@ -3,18 +3,22 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import { createStore } from 'redux'
-import { counter, addGUN, removeGUN } from './index.redux'
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
+import { Provider } from 'react-redux'
+import { counter } from './index.redux'
 
-const store = createStore(counter)
-function render() {
-  ReactDOM.render(<App store={store} addGUN={addGUN} removeGUN={removeGUN}/>, document.getElementById('root'))
-}
+const store = createStore(counter, applyMiddleware(thunk))
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+  ,
+  document.getElementById('root'))
+
 registerServiceWorker();
 
-render()
-
-store.subscribe(render)
 // import { createStore } from 'redux'
 
 // function counter(state = 0, action) {
