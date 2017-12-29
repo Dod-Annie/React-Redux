@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { connect } from 'react-redux'
 import { addGUN, removeGUN, addGunAsync } from './index.redux'
+import axios from 'axios'
 
 const mapStatetoProps = (state) => {
   return { num: state }
@@ -14,6 +15,12 @@ const actionCreators = { addGUN, removeGUN, addGunAsync }
 
 @connect(mapStatetoProps, actionCreators)
 class App extends Component {
+  componentDidMount(){
+    axios.get('/data')
+    .then(res=>{
+      console.log(res)
+    })
+  }
   render() {
     const num = this.props.num
     const addGUN = this.props.addGUN
